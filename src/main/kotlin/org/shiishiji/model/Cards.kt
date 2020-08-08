@@ -6,5 +6,7 @@ import org.shiishiji.enitity.Card
 
 object Cards : Table<Card>("t_card"){
     val id = int("id").primaryKey().bindTo { it.id }
-
+    var owner = int("user_id").references(Users) { it.owner }
+    var lottery = uuid("lottery_id").references(Lotteries) { it.lottery }
+    var type = int("type_id").references(Types) { it.type }
 }
