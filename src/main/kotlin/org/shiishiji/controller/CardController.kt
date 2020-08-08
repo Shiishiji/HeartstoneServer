@@ -4,8 +4,8 @@ import io.javalin.http.Context
 
 object CardController {
 
-    fun create(ctx: Context) {
-        ctx.json("create")
+    fun add(ctx: Context) {
+        ctx.json("add")
     }
 
 }

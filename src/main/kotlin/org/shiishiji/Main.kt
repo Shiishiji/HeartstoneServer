@@ -28,7 +28,7 @@ fun main(args: Array<String>) {
             }
         }
         path("cards") {
-            put(CardController::create)
+            put(CardController::add)
         }
         path("types") {
             get(TypeController::getTypes)
