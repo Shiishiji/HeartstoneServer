@@ -4,6 +4,15 @@ import me.liuwj.ktorm.entity.Entity
 
 interface Type : Entity<Type> {
     companion object : Entity.Factory<Type>()
-    val id: Int
-    val value: Int
+    var id: Int
+    var value: Int
+    var name: String
+
+    fun toHashMap() : HashMap<String, Any> {
+        return hashMapOf(
+            "id" to id,
+            "name" to name,
+            "value" to value
+        )
+    }
 }
