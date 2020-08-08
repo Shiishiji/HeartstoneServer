@@ -8,8 +8,6 @@ import me.liuwj.ktorm.dsl.*
 import me.liuwj.ktorm.entity.sequenceOf
 import org.shiishiji.model.Types
 
-val Database.types get() = this.sequenceOf(Types)
-
 object TypeController {
 
     fun getTypes(ctx: Context) {
