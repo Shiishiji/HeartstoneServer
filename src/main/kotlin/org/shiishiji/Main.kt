@@ -2,20 +2,23 @@ package org.shiishiji
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.plugin.openapi.OpenApiOptions
+import io.javalin.plugin.openapi.OpenApiPlugin
+import io.javalin.plugin.openapi.ui.ReDocOptions
+import io.javalin.plugin.openapi.ui.SwaggerOptions
+import io.swagger.v3.oas.models.info.Info
 import org.shiishiji.controller.CardController
 import org.shiishiji.controller.LotteryController
 import org.shiishiji.controller.TypeController
 import org.shiishiji.controller.UserController
 
-fun main(args: Array<String>) {
-    val app = Javalin.create()
-            .apply {
-                exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
-                error(404) { ctx -> ctx.json("error 404 - route not found") }
-            }
-            .start(7000)
 
-    app.routes{
+fun main(args: Array<String>) {
+    Javalin.create {
+        it.registerPlugin(getConfiguredOpenApiPlugin())
+        it.defaultContentType = "application/json"
+    }
+    .routes{
         path("users") {
             get(UserController::getUsers)
 
@@ -34,5 +37,23 @@ fun main(args: Array<String>) {
             get(TypeController::getTypes)
         }
     }
+    .start(7000)
+
+    println("Check out Swagger UI docs at http://localhost:7000/")
 }
 
+fun getConfiguredOpenApiPlugin() = OpenApiPlugin(
+    OpenApiOptions(
+        Info()
+            .title("ServerHS")
+            .description("ServerHS")
+            .version("1.0.0")
+    ).apply {
+        path("/swagger-docs")
+        swagger(SwaggerOptions("/"))
+        defaultDocumentation {doc ->
+            doc.json("500", ErrorResponse::class.java)
+            doc.json("503", ErrorResponse::class.java)
+        }
+    }
+)
