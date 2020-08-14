@@ -1,4 +1,4 @@
-package org.shiishiji
+package org.shiishiji.controller.response
 
 data class ErrorResponse(
     val title: String,

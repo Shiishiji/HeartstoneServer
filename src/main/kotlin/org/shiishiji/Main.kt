@@ -4,13 +4,13 @@ import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.plugin.openapi.OpenApiOptions
 import io.javalin.plugin.openapi.OpenApiPlugin
-import io.javalin.plugin.openapi.ui.ReDocOptions
 import io.javalin.plugin.openapi.ui.SwaggerOptions
 import io.swagger.v3.oas.models.info.Info
 import org.shiishiji.controller.CardController
 import org.shiishiji.controller.LotteryController
 import org.shiishiji.controller.TypeController
 import org.shiishiji.controller.UserController
+import org.shiishiji.controller.response.ErrorResponse
 
 
 fun main(args: Array<String>) {
@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
             }
         }
         path("cards") {
-            put(CardController::add)
+            put(CardController::addCard)
         }
         path("types") {
             get(TypeController::getTypes)

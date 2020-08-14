@@ -8,7 +8,7 @@ object CardController {
     @OpenApi(
         tags = ["card"]
     )
-    fun add(ctx: Context) {
+    fun addCard(ctx: Context) {
         ctx.json("add")
     }
 
