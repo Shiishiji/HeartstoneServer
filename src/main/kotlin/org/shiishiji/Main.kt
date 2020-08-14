@@ -21,11 +21,11 @@ fun main(args: Array<String>) {
     .routes{
         path("users") {
             get(UserController::getUsers)
-
+            put(UserController::addUser)
         }
         path("lotteries") {
             get(LotteryController::getLotteries)
-            put(LotteryController::createLottery)
+            put(LotteryController::addLottery)
             path(":id") {
                 get(LotteryController::getLottery)
             }
